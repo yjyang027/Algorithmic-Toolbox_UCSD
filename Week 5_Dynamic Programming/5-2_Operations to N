@@ -1,0 +1,30 @@
+n = int(input())
+dictO={1:0}
+
+
+def opera(n):     
+    a=[n]
+    for i in range(2,n+1):
+        dictO[i]=dictO[i-1]+1
+        if i%2 ==0:
+            dictO[i]=min (dictO[i],dictO[i//2]+1)
+        elif i%3 ==0:
+            dictO[i]=min (dictO[i],dictO[i//3]+1)    
+#    print (dictO)
+    i=n
+    while i>1:        
+        if dictO[i - 1] == dictO[i] - 1:
+            i = i - 1
+            a.append(i)
+        elif i % 3 == 0 and dictO[i//3] == dictO[i] - 1:
+            i = i // 3
+            a.append(i)
+        elif i % 2 == 0 and dictO[i//2] == dictO[i] - 1:
+            i = i // 2
+            a.append(i)        
+    a.reverse()
+    return a
+    
+
+print (len(opera(n))-1)
+print (' '.join([str(i) for i in opera(n)]))
