@@ -1,0 +1,24 @@
+n= int (input())
+
+def Fib(n):
+    dict={0:0,1:1}
+    if n in dict:
+       return dict[n]
+    else:
+       ans=Fib(n-1)+Fib(n-2)
+       return ans
+       dict[n]=ans
+
+def effiFib(n):
+    prev=0
+    curr=1
+    if n<=1:
+        return n
+    else:
+        for i in range(n-1):
+            ans = prev+curr
+            prev = curr
+            curr = ans
+    return ans
+        
+print (effiFib(n))
