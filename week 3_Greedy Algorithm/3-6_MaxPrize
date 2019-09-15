@@ -1,0 +1,19 @@
+n = int(input())
+
+total = 0
+a = 1
+count = 0
+listOfNum = []
+
+while total + a <= n:  #quit loop when boom!
+    total += a
+#    print ("total:", total)
+    listOfNum.append(a)
+#    print (listOfNum)
+    a += 1
+    count += 1
+
+listOfNum[count-1] += n - total  #rewrite the last element
+
+print(count)
+print(*listOfNum)
