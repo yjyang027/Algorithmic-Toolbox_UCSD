@@ -1,0 +1,17 @@
+m=int(input())
+
+def CashtoNumber(m):
+    cash=[10,5,1]
+    count=0
+    while m>0:
+        for i in range(len(cash)):
+            a=m//cash[i]
+            count += a
+            if a==0:
+                i += 1
+            else:
+                m = m-a*cash[i]
+                i += 1
+    return count
+
+print (CashtoNumber(m))
