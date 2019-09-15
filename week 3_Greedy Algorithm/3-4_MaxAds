@@ -1,0 +1,13 @@
+n=int(input())
+a=list(map(int, input().split()))
+b=list(map(int, input().split()))
+
+def MaxSum(n,a,b):
+    sum=0
+    a.sort()
+    b.sort()
+    for i in range(len(a)):
+        sum += a[i]*b[i]
+    return sum
+
+print (MaxSum(n,a,b))
