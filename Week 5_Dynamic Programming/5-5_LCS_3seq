@@ -1,0 +1,32 @@
+n=int(input())
+while True:
+      A=[int(i) for i in input().split()]
+      if len(A)==n:
+          break
+
+m=int(input())
+while True:
+      B=[int(i) for i in input().split()]
+      if len(B)==m:
+          break
+
+l=int(input())
+while True:
+      C=[int(i) for i in input().split()]
+      if len(C)==l:
+          break
+          
+def LCS(n,m,l,A,B,C):
+    arr = [[[0 for z in range(l+1)] for y in range(m+1)] 
+         for x in range(n+1)] #order of axis
+    for i in range(1,n+1):
+        for j in range(1,m+1):
+            for k in range(1,l+1):
+                if A[i-1]==B[j-1] and A[i-1]==C[k-1]:
+                    arr[i][j][k]=arr[i-1][j-1][k-1]+1
+                else:
+                    arr[i][j][k]=max(arr[i-1][j][k],arr[i][j-1][k],arr[i][j][k-1])
+            
+    return arr[n][m][l]
+
+print (LCS(n,m,l,A,B,C))
