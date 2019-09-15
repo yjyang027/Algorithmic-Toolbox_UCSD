@@ -1,0 +1,36 @@
+s,p = [int(i) for i in input().split()]
+
+segs=[]
+for i in range(s):
+    segs.append([int(i) for i in input().split()])
+while True:
+    points=[int(i) for i in input().split()]
+    if len(points)==p:
+        break
+
+def Lottery(segs,points):
+    new=[]
+    for i in segs:
+        new.append([i[0],'L'])
+        new.append([i[1],'R'])
+    for i in points:
+        new.append([i, 'P'])
+    new.sort()
+    
+    count=0
+    dict_p={}
+    for i in new:
+        if i[1]=='L': #Rays ahead of a certain point
+            count+=1
+        elif i[1]=='R': # Ray ends
+            count-=1
+        elif i[1]=='P':
+            dict_p[i[0]]=count
+#    print(dict_p)
+    return dict_p
+
+dict_p=Lottery(segs,points)
+ans=[]
+for i in points:
+    ans.append(dict_p[i])
+print (' '.join([str(i) for i in ans]))
