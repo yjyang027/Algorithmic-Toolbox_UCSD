@@ -1,0 +1,37 @@
+n, m = map (int, input().split())
+
+def effiFib(n):
+    prev=0
+    curr=1
+    if n<=1:
+        return n
+    else:
+        for i in range(n-1):
+            ans = prev+curr
+            prev = curr
+            curr = ans
+    return ans
+
+def PisanoPeriod (m):
+    L=[effiFib(0), effiFib(1)]
+    n=2 #start from Fib(2)
+    while True:
+        div = effiFib(n)%m
+        L.append(div)
+        if L[-1]==effiFib(1) and L[-2]==effiFib(0): #all periodic start with Fib(0), Fib(1)
+            break
+        else:
+            n += 1
+#    periodic=len(L)-2
+#    L.remove(L[-1]) don't use remove here
+    del L[-1]
+    del L[-1]
+    return L         # periodic list
+
+def modFib(n,m):
+    per = PisanoPeriod (m)
+#    print (per)
+    return per[n%len(per)]
+     
+print (modFib(n,m))
+    
