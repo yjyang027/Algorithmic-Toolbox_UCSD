@@ -1,0 +1,44 @@
+n = int(input())
+A = [int(i) for i in input().split()]
+low = 0
+high = n-1
+count=0
+
+def Majority(A,low,high):
+    val=False
+    if low == high:
+        return A[low]
+    else:
+        mid=(low+high)//2
+        left = Majority(A,low,mid)
+        right = Majority(A,mid+1,high)
+        if left == -1 and right == -1: #most cases, mode of sublist (count<n/2) will become -1
+            return -1
+        while val: #once either count>n/2, return the answer directly
+           if left != -1:
+               return left
+           if right != -1:
+               return right
+            
+        count_L=0
+        count_R=0
+        for i in A: #scan all the list and get the mode (left or right?)
+            if i==left:
+                count_L += 1
+            if i==right:
+                count_R += 1
+        if count_L>n/2:
+            val=True      
+            return left
+        elif count_R>n/2:
+            val=True
+            return right
+        else:
+            return -1
+
+if Majority(A,low,high) != -1:
+    print (1)
+else:
+    print (0)
+
+# Failed case #11/21: time limit exceeded (Time used: 9.98/5.00, memory used: 21372928/536870912.)
