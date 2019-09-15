@@ -1,0 +1,76 @@
+import sys
+import random
+    
+def distance(p1, p2):
+    return ((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)**0.5
+
+def BruteForce(points):
+    ans = sys.maxsize #MAX
+    for i in range(len(points)):
+        for j in range(i+1,len(points)):
+            if ans > distance(points[i],points[j]):
+                ans = distance(points[i],points[j])
+    return round (ans,5)
+
+def inStrip(d,points): #get min distance in the strip
+    ans=d
+    points.sort(key=lambda p: p[1]) #sort points by Y
+    for i in range(len(points)):
+        for j in range(i + 1, min(i+8, len(points))): #at most 7 points such that distance<d
+            if distance(points[i],points[j])<d:
+                ans = min(ans,distance(points[i],points[j]))
+    return ans
+
+def points_in_strip(d,points): #get points in the strip
+    p_strip=[]
+    midline=points[len(points)//2][0] # do not use (p[0].x+p[-1].x)/2
+#    print ('midline', midline)
+    for p in points:
+        if abs (p[0]-midline)<d:
+            p_strip.append(p)
+    return p_strip
+                 
+#print(BruteForce(points))
+
+def ClosePair(points):
+    if len(points) <= 3: #Brute to get base conditions
+        return BruteForce(points)
+    else:
+        points.sort() #sort by X
+        mid=len(points)//2
+#        print (points[:mid],points[mid:])
+        d1=ClosePair(points[:mid])      
+        d2=ClosePair(points[mid:])    
+        d_temp=min(d1,d2)
+        p_strip=points_in_strip(d_temp,points)
+#        print ('points in strip:', p_strip)
+        d3=inStrip(d_temp,p_strip)
+#        print ('d3',d3,'min(d1,d2)',d_temp)
+        ans = min(d3,d_temp)
+    return round (ans,5)
+
+n = int(input())
+points=[]
+for i in range(n):
+    points.append([int(i) for i in input().split()])
+print (ClosePair(points))
+
+        
+#def test(): #Stress test
+#    while True:
+#        n=random.randint(0, 10)
+#        p=[]
+#        for i in range(n):
+#            x=random.randint(0, 100)
+#            y=random.randint(0, 100)     
+#            p.append([x,y])
+#        if ClosePair(p)==BruteForce(p):
+#            print('True')
+#        else:
+#            print (p)
+#            print('Wrong!', 'Pair: ', ClosePair(p),'Brute: ', BruteForce(p))
+#            break
+        
+# Time used: 10.36/10.00
+
+        
