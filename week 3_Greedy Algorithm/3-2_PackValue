@@ -1,0 +1,24 @@
+n, W = map(int, input().split())
+dictP={}
+K=[]
+
+for i in range(n):
+    v, w = map(int, input().split())
+    K.append(v/w)
+    dictP[v/w] = [v,w]
+    
+def PackValue(W, dictP):
+    count=0
+    K.sort(reverse=True)
+    
+    for i in range(len(K)):
+        v_w=dictP[K[i]]   #temporary =value and w, when MAX per v/w
+        if v_w[1]>=W:
+            count += W*K[i] # =W * v/w when w>=W
+            break
+        else:
+            count += v_w[1]*K[i] # = w * v/w when w<W
+            W -= v_w[1]
+    return round (count, 4)
+                
+print (PackValue(W, dictP))
