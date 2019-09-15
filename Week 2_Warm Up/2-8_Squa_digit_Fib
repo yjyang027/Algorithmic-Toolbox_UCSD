@@ -1,0 +1,15 @@
+n= int (input())
+
+def Squa_digit_Fib(n):
+    prev=0
+    curr=1
+    if n<=1:
+        return n
+    else:
+        for i in range(n):  # calculate to Fib(n+1), 
+            ans = prev+curr
+            prev = curr
+            curr = ans # where ans=curr=Fib(n+1), prev=Fib(n)
+    return (prev*curr)%10 #Sum Of (Fib[0]^2+Fib[1]^2+.....+Fib[n]^2) = Fib[n]*Fib[n+1]
+           
+print (Squa_digit_Fib(n))
