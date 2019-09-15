@@ -1,0 +1,13 @@
+a, b = map(int, input().split())
+
+def GCD(a, b):
+    assert 1 <= a,b <= 2*10**9
+    if b==0:
+        return a
+    else:
+        return GCD(b, a%b)
+
+def LCM(a, b):
+    return int (a*b/GCD(a, b))
+
+print (LCM(a, b))
