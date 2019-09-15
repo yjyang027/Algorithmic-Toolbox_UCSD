@@ -1,0 +1,42 @@
+import sys
+
+exp = input()
+digits = list(map(int, exp[0::2]))
+ops = list(exp[1::2]) #get the operations
+n=len(digits)
+M = [[0 for x in range(n+1)] for y in range(n+1)]  #set dummy row
+m = [[0 for x in range(n+1)] for y in range(n+1)] 
+
+def cal(a,b,op):
+    if op=='+':
+        ans=a+b
+    if op=='-':
+        ans=a-b
+    if op=='*':
+        ans=a*b
+    return ans
+
+def MinMax(i,j):
+    MIN=sys.maxsize
+    MAX=-sys.maxsize
+    for k in range(i,j):
+        a=cal(M[i][k],M[k+1][j],ops[k-1])
+        b=cal(M[i][k],m[k+1][j],ops[k-1])
+        c=cal(m[i][k],M[k+1][j],ops[k-1])
+        d=cal(m[i][k],m[k+1][j],ops[k-1])
+        MIN=min(MIN,a,b,c,d)
+        MAX=max(MAX,a,b,c,d)
+    return MAX,MIN
+    
+def Parenthese(digits,ops):  
+    for i in range(1,n+1): #define diagonal
+        M[i][i]=digits[i-1]
+        m[i][i]=digits[i-1]
+    for s in range(1,n+1):
+        for i in range(1,n-s+1): #progress in diagonal
+            j=s+i
+            M[i][j],m[i][j]=MinMax(i,j)
+#            print('i,j: ',i, j,'M, m=', M[i][j],m[i][j])
+    return M[1][n]
+
+print (Parenthese(digits,ops))
