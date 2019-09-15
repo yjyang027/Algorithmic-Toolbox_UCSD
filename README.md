@@ -1,4 +1,5 @@
 Data Structures and Algorithms Specialization
+https://www.coursera.org/specializations/data-structures-algorithms
 
 About This Specialization:
 The Specialization covers algorithmic techniques for solving problems arising in computer science applications. It is a mix of theory and practice: you will not only design algorithms and estimate their complexity, but you will get a deeper understanding of algorithms by implementing them in the programming language of your choice (C, C++, C#, Haskell, Java, JavaScript, Python2, Python3, Ruby, and Scala).
