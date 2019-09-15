@@ -1,0 +1,26 @@
+n=int(input())
+seg=[]
+for i in range(n):
+    a=list(map(int, input().split()))
+    seg.append(a)
+
+
+def Signature(n,seg):
+    ans=[]
+    seg.sort(key=lambda seg:seg[1])
+    i=0    
+    while i<n:       
+        curr_end=seg[i][1] # check whether endpoint be covered, i=0 to n-2
+        while i<n-1 and curr_end>=seg[i+1][0]:
+            i += 1           
+        if curr_end not in ans: #both cover or not cover, should append curr_endpoint 
+            ans.append(curr_end)
+        i += 1
+        
+    ans.sort()
+    print (len(ans)) 
+    return ' '.join([str(i) for i in ans])
+
+print (Signature(n,seg))
+   
+# clear
