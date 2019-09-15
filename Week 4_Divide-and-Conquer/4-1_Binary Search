@@ -1,0 +1,38 @@
+seq = [int(i) for i in input().split()]
+search_seq = [int(i) for i in input().split()]
+n = seq[0]
+seq = seq[1:]
+search_seq = search_seq[1:]
+
+seq.sort()
+low = 0
+high = n-1
+
+def Binary(num,low,high,seq):
+        mid=(low+high)//2
+#        print ('mid: ', mid)
+        if mid == low: #only 2 num left
+            if num == seq[mid]:
+                return mid
+            elif num == seq[high]:
+                return high
+            else:
+                return -1
+        elif num == seq[mid]:
+            return mid
+        elif num > seq[mid]:
+            return Binary(num,mid,high,seq)
+        elif num < seq[mid]:
+            return Binary(num,low,mid,seq)
+        
+        
+def imple_Binary(search_seq,seq):
+    low=0
+    high=n-1
+    ans=[]       
+    for num in search_seq:
+         ans.append(Binary(num,low,high,seq))
+#         print ('ans: ', ans)
+    return ' '.join([str(i) for i in ans])
+    
+print (imple_Binary(search_seq,seq))
