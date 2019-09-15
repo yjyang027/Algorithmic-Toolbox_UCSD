@@ -1,0 +1,29 @@
+d=int(input())
+m=int(input())
+n=int(input())
+S=[0]
+S_middle=list(map(int, input().split()))
+for i in range(len(S_middle)):
+    S.append(S_middle[i])
+S.append(d)
+    
+def CarFueling(d,m,n,S):
+    begin=S[0]
+    count=0
+    if m>d:
+        return 0 #no need to refill
+    for i in range(n+1):
+        if S[i+1]-S[i]>m:
+            return -1   #impossible
+    j=1
+    while j<=n+1:           
+        while S[j]-begin<=m:
+             j+=1
+             if j==n+2:
+                 return count
+        begin=S[j-1]   #S[i-1]:next start STOP
+        count+=1
+
+print (CarFueling(d,m,n,S))
+           
+# Failed case #4/51: Wrong answer    
